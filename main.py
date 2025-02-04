@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
+import uvicorn
 import threading
 
 app = FastAPI()
@@ -84,3 +85,6 @@ def refresh_token():
             return {"error": "Response did not contain access_token", "details": json_response}
     else:
         return {"error": "Failed to refresh access token", "status": response.status_code, "details": response.json()}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
